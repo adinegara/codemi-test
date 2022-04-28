@@ -4,11 +4,11 @@
 
 import styled from 'styled-components';
 
-const A = styled.a`
-  color: #41addd;
+const A = styled.span`
+  margin-left: 10px;
 
   &:hover {
-    color: #6cc0e5;
+    color: #3cb748;
   }
 `;
 
