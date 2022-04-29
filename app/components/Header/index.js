@@ -45,7 +45,17 @@ function HeaderPage({ content }) {
           </Row>
         </NavBar>
         <Layout hasSider>
-          <Side theme="light" width={250}>
+          <Side
+            theme="light"
+            width={250}
+            style={{
+              overflow: 'auto',
+              height: '100vh',
+              position: 'fixed',
+              // left: 0,
+              transition: 'all 0.2s ease-in-out',
+            }}
+          >
             <Menu
               theme="light"
               mode="inline"

@@ -5,7 +5,7 @@ import { Card, Col, Divider, List, Row, Space } from 'antd';
 import { RightOutlined } from '@ant-design/icons';
 import { NavLink } from 'react-router-dom';
 
-function TopRate({ data }) {
+function TopConfirm({ data }) {
   const DividerTable = styled(Divider)`
     margin: 0 !important;
     opacity: 0.6;
@@ -15,9 +15,9 @@ function TopRate({ data }) {
       <List
         header={
           <Row>
-            <Col span={12}>Courses</Col>
+            <Col span={12}>Users</Col>
             <Col span={6}>Completed</Col>
-            <Col span={6}>Completion %</Col>
+            <Col span={6}>Points</Col>
           </Row>
         }
         dataSource={data}
@@ -31,16 +31,14 @@ function TopRate({ data }) {
             <Col span={6}>
               <List.Item>
                 <span className="float-right">
-                  {parseFloat(item.incidentRate)
-                    .toFixed(2)
-                    .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
+                  {item.confirmed.replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
                 </span>
               </List.Item>
             </Col>
             <Col span={6}>
               <List.Item>
                 <span className="float-right">
-                  {parseFloat(item.caseFatalityRatio).toFixed(2)} %
+                  {item.deaths.replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
                 </span>
               </List.Item>
             </Col>
@@ -50,7 +48,7 @@ function TopRate({ data }) {
       />
       <NavLink to="/dashboard" className=" float-right default mt-20">
         <Space align="start">
-          <h3 className="mb-0 default">COURSE REPORT</h3>
+          <h3 className="mb-0 default">USER REPORT</h3>
           <RightOutlined />
         </Space>
       </NavLink>
@@ -58,8 +56,8 @@ function TopRate({ data }) {
   );
 }
 
-TopRate.propTypes = {
+TopConfirm.propTypes = {
   data: PropTypes.array,
 };
 
-export default TopRate;
+export default TopConfirm;

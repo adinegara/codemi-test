@@ -7,6 +7,8 @@ import H2 from 'components/H2';
 import Content from 'components/Content';
 import LastMonth from './LastMonth';
 import TopRate from './TopRate';
+import TopConfirm from './TopConfirm';
+import LastWeek from './LastWeek';
 
 export default function DashboardPage() {
   const [monthly, setMonthly] = useState([]);
@@ -15,25 +17,45 @@ export default function DashboardPage() {
   const [topIncident, setTopIncident] = useState([]);
   const [topConfirm, setTopConfirm] = useState([]);
 
-  const monthlySort = monthly.sort((a, b) => {
-    if (a.lastUpdate < b.lastUpdate) {
-      return 1;
-    }
-    if (a.lastUpdate > b.lastUpdate) {
-      return -1;
-    }
-    return 0;
-  });
+  const [totalWeekConfirm, setTotalWeekConfirm] = useState(0);
+  const [totalWeekDeath, setTotalWeekDeath] = useState(0);
+  const [lastCase, setLastCase] = useState(0);
+  const [lastIncident, setLastIncident] = useState(0);
 
-  const sortAndSlice = (arr, limit) => {
+  const sortDays = (arr, limit) => {
     const result = arr
-      .sort((a, b) => Number(a.confirmed) - Number(b.confirmed))
+      .sort((a, b) => {
+        if (a.lastUpdate < b.lastUpdate) {
+          return 1;
+        }
+        if (a.lastUpdate > b.lastUpdate) {
+          return -1;
+        }
+        return 0;
+      })
       .slice(0, limit);
-
     return result;
   };
 
-  const monthlyTop = sortAndSlice(monthlySort, 5);
+  const sortCountry = (arr, limit) => {
+    const result = arr
+      .sort((a, b) => {
+        if (a.confirmed < b.confirmed) {
+          return 1;
+        }
+        if (a.confirmed > b.confirmed) {
+          return -1;
+        }
+        return 0;
+      })
+      .slice(0, limit);
+    return result;
+  };
+
+  const monthlySort = sortDays(monthly, 30);
+  const weeklySort = sortDays(monthly, 7);
+
+  const monthlyTop = sortCountry(monthlySort, 5);
 
   useEffect(() => {
     let total = 0;
@@ -42,6 +64,25 @@ export default function DashboardPage() {
     });
     setTotalConfirm(total);
   }, [monthly]);
+
+  useEffect(() => {
+    let total = 0;
+    weeklySort.forEach(d => {
+      total += Number(d.confirmed);
+    });
+    setTotalWeekConfirm(total);
+
+    let total2 = 0;
+    weeklySort.forEach(d => {
+      total2 += Number(d.deaths);
+    });
+    setTotalWeekDeath(total2);
+
+    if (weeklySort.length > 0) {
+      setLastCase(Number(weeklySort.at(-1).caseFatalityRatio));
+      setLastIncident(Number(weeklySort.at(-1).incidentRate));
+    }
+  }, [weeklySort]);
 
   const getDateRange = () => {
     const arrDate = [];
@@ -76,6 +117,10 @@ export default function DashboardPage() {
           const filtered = res.data.filter(
             data2 => data2.countryRegion === 'Indonesia',
           );
+          filtered[0].confirmed = Number(filtered[0].confirmed);
+          filtered[0].deaths = Number(filtered[0].deaths);
+          filtered[0].caseFatalityRatio = Number(filtered[0].caseFatalityRatio);
+          filtered[0].incidentRate = Number(filtered[0].incidentRate);
           return filtered;
         })
 
@@ -105,17 +150,7 @@ export default function DashboardPage() {
           })
           .slice(0, 6);
 
-        const filtered2 = res.data
-          .sort((a, b) => {
-            if (a.confirmed < b.confirmed) {
-              return 1;
-            }
-            if (a.confirmed > b.confirmed) {
-              return -1;
-            }
-            return 0;
-          })
-          .slice(0, 6);
+        const filtered2 = sortCountry(res.data, 6);
 
         setTopIncident(filtered1);
         setTopConfirm(filtered2);
@@ -134,7 +169,15 @@ export default function DashboardPage() {
         </Helmet>
         <H2> Codemi Home </H2>
         <Row gutter={[16, 16]}>
-          <Col span={16} />
+          <Col span={16}>
+            <LastWeek
+              data={weeklySort}
+              totalConfirm={totalWeekConfirm}
+              totalDeath={totalWeekDeath}
+              totalCase={lastCase}
+              totalIncident={lastIncident}
+            />
+          </Col>
           <Col span={8}>
             <LastMonth
               monthly={monthlySort}
@@ -142,12 +185,13 @@ export default function DashboardPage() {
               top={monthlyTop}
             />
           </Col>
-          <Col span={12}>
+          <Col span={12} className="mt-10">
             <H2> What courses do your users visit?</H2>
-            <TopRate data={topIncident} data2={topConfirm} />
+            <TopRate data={topIncident} />
           </Col>
-          <Col span={12}>
+          <Col span={12} className="mt-10">
             <H2> What is your most active user?</H2>
+            <TopConfirm data={topConfirm} />
           </Col>
         </Row>
       </div>

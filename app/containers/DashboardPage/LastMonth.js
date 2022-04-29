@@ -30,18 +30,21 @@ function LastMonth({ monthly, total, top }) {
   const config = {
     data: monthly,
     color: 'white',
-    height: 200,
+    height: 180,
     xField: 'lastUpdate',
     yField: 'confirmed',
     xAxis: false,
-    yAxis: false,
+    yAxis: {
+      min: 6000000000,
+      label: false,
+    },
   };
 
   return (
     <CardContainer>
       <strong>Active User Right Now</strong>
       <TextTitle>
-        {total.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.')}
+        {total.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
       </TextTitle>
       <div>Page views per minute</div>
       <DividerTitle />
@@ -65,7 +68,7 @@ function LastMonth({ monthly, total, top }) {
                 <List.Item className="white">
                   {item.confirmed
                     .toString()
-                    .replace(/\B(?=(\d{3})+(?!\d))/g, '.')}
+                    .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
                 </List.Item>
               </Col>
               <DividerTable />
@@ -74,7 +77,7 @@ function LastMonth({ monthly, total, top }) {
         />
       </div>
       <NavLink to="/dashboard" className="white float-right mt-20">
-        <Space align="center">
+        <Space align="start">
           <h3 className="mb-0 white">REAL TIME REPORT</h3>
           <RightOutlined />
         </Space>

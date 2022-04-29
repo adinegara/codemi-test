@@ -32,6 +32,10 @@ const GlobalStyle = createGlobalStyle`
     color: white !important;
   }
 
+  .default {
+    color: #3bb64a;
+  }
+
   .m-0 { margin: 0px !important}
 
   .mt-0 { margin-top: 0px !important}
@@ -54,6 +58,7 @@ const GlobalStyle = createGlobalStyle`
   .mr-10 { margin-right:10px }
   .mr-20 { margin-right: 20px }
 
+  .p-0 { padding: 0 !important}
   .p-5 { padding: 5px }
   .p-10 { padding:10px }
   .p-15 { padding:15px }
@@ -83,6 +88,39 @@ const GlobalStyle = createGlobalStyle`
 .float-right {
     float: right;
 }
-`;
+.font-bold {
+  font-weight: bolder;
+}
+
+.ant-menu-item-selected, .ant-menu-item-selected a,.ant-menu-item-active, .ant-menu-item-selected a:hover, .ant-menu-item a:hover, 
+.ant-menu:not(.ant-menu-horizontal) .ant-menu-item-selected{
+  color: #3bb64a !important;
+}
+.ant-menu:not(.ant-menu-horizontal) .ant-menu-item-selected{
+  background-color: transparent !important;
+}
+.ant-menu-vertical .ant-menu-item::after,
+.ant-menu-vertical-left .ant-menu-item::after,
+.ant-menu-vertical-right .ant-menu-item::after,
+.ant-menu-inline .ant-menu-item::after {
+  border-right: 3px solid #3bb64a !important;
+}
+
+.ant-tabs-top > .ant-tabs-nav .ant-tabs-ink-bar,
+.ant-tabs-top > div > .ant-tabs-nav .ant-tabs-ink-bar {
+  top: 0;
+}
+.ant-tabs-tab.ant-tabs-tab-active .ant-tabs-tab-btn, .ant-tabs-tab:hover  {
+  color: #3bb64a !important;
+}
+.ant-tabs-ink-bar {
+  background: #3bb64a !important;
+  height: 3px !important;
+}
+
+.card-p-0 > .ant-card-body {
+  padding-top: 0 !important;
+}
+  `;
 
 export default GlobalStyle;
