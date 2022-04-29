@@ -10,7 +10,6 @@ function TopRate({ data }) {
     margin: 0 !important;
     opacity: 0.6;
   `;
-  console.log(data);
   return (
     <Card>
       <List
