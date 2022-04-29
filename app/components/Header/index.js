@@ -45,7 +45,7 @@ function HeaderPage({ content }) {
           </Row>
         </NavBar>
         <Layout hasSider>
-          <Side theme="light" width={300}>
+          <Side theme="light" width={250}>
             <Menu
               theme="light"
               mode="inline"
@@ -140,7 +140,6 @@ function HeaderPage({ content }) {
             </Menu>
           </Side>
           {content}
-          {/* <Content>Content</Content> */}
         </Layout>
       </Layout>
     </div>
