@@ -9,11 +9,9 @@
 import React from 'react';
 import { Helmet } from 'react-helmet';
 import styled from 'styled-components';
-import { Switch, Route } from 'react-router-dom';
+import { Switch, Route, Redirect } from 'react-router-dom';
 
 import DashboardPage from 'containers/DashboardPage/Loadable';
-import HomePage from 'containers/HomePage/Loadable';
-import FeaturePage from 'containers/FeaturePage/Loadable';
 import NotFoundPage from 'containers/NotFoundPage/Loadable';
 import Header from 'components/Header';
 
@@ -39,9 +37,10 @@ export default function App() {
       <Header
         content={
           <Switch>
-            <Route exact path="/" component={HomePage} />
+            <Route exact path="/">
+              <Redirect to="/dashboard" />
+            </Route>
             <Route path="/dashboard" component={DashboardPage} />
-            <Route path="/features" component={FeaturePage} />
             <Route path="" component={NotFoundPage} />
           </Switch>
         }

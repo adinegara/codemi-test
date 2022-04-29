@@ -55,7 +55,9 @@ function LastMonth({ monthly, total, top }) {
           header={
             <Row>
               <Col span={18}>Top Active Pages</Col>
-              <Col span={6}>Active Users</Col>
+              <Col span={6} className="float-right">
+                Active Users
+              </Col>
             </Row>
           }
           dataSource={top}
@@ -65,7 +67,7 @@ function LastMonth({ monthly, total, top }) {
                 <List.Item className="white">{item.lastUpdate}</List.Item>
               </Col>
               <Col span={6}>
-                <List.Item className="white">
+                <List.Item className="white float-right">
                   {item.confirmed
                     .toString()
                     .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}

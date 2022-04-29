@@ -16,8 +16,12 @@ function TopRate({ data }) {
         header={
           <Row>
             <Col span={12}>Courses</Col>
-            <Col span={6}>Completed</Col>
-            <Col span={6}>Completion %</Col>
+            <Col span={6} className="float-right">
+              Completed
+            </Col>
+            <Col span={6} className="float-right">
+              Completion %
+            </Col>
           </Row>
         }
         dataSource={data}
@@ -29,8 +33,8 @@ function TopRate({ data }) {
               </List.Item>
             </Col>
             <Col span={6}>
-              <List.Item>
-                <span className="float-right">
+              <List.Item className="float-right">
+                <span>
                   {parseFloat(item.incidentRate)
                     .toFixed(2)
                     .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
@@ -38,10 +42,8 @@ function TopRate({ data }) {
               </List.Item>
             </Col>
             <Col span={6}>
-              <List.Item>
-                <span className="float-right">
-                  {parseFloat(item.caseFatalityRatio).toFixed(2)} %
-                </span>
+              <List.Item className="float-right">
+                <span>{parseFloat(item.caseFatalityRatio).toFixed(2)} %</span>
               </List.Item>
             </Col>
             <DividerTable />

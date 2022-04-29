@@ -16,8 +16,12 @@ function TopConfirm({ data }) {
         header={
           <Row>
             <Col span={12}>Users</Col>
-            <Col span={6}>Completed</Col>
-            <Col span={6}>Points</Col>
+            <Col span={6} className="float-right">
+              Completed
+            </Col>
+            <Col span={6} className="float-right">
+              Points
+            </Col>
           </Row>
         }
         dataSource={data}
@@ -29,17 +33,15 @@ function TopConfirm({ data }) {
               </List.Item>
             </Col>
             <Col span={6}>
-              <List.Item>
-                <span className="float-right">
+              <List.Item className="float-right">
+                <span>
                   {item.confirmed.replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
                 </span>
               </List.Item>
             </Col>
             <Col span={6}>
-              <List.Item>
-                <span className="float-right">
-                  {item.deaths.replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
-                </span>
+              <List.Item className="float-right">
+                <span>{item.deaths.replace(/\B(?=(\d{3})+(?!\d))/g, ',')}</span>
               </List.Item>
             </Col>
             <DividerTable />

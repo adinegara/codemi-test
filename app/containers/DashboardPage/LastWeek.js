@@ -114,7 +114,9 @@ function LastWeek({
               <H1 className={key === 1 ? 'font-bold' : ''}>
                 {formatK(totalConfirm)}
               </H1>
-              <FontAwesomeIcon icon={faLongArrowAltUp} />
+              <span className="default">
+                <FontAwesomeIcon icon={faLongArrowAltUp} /> 1.02%
+              </span>
             </>
           }
           key="1"
@@ -131,7 +133,9 @@ function LastWeek({
               <H1 className={key === 2 ? 'font-bold' : ''}>
                 {formatK(totalDeath)}
               </H1>
-              <FontAwesomeIcon icon={faLongArrowAltUp} />
+              <span className="default">
+                <FontAwesomeIcon icon={faLongArrowAltUp} /> 0.34%
+              </span>
             </>
           }
           key="2"
@@ -148,7 +152,9 @@ function LastWeek({
               <H1 className={key === 3 ? 'font-bold' : ''}>
                 {totalCase.toFixed(2)} %
               </H1>
-              <FontAwesomeIcon icon={faLongArrowAltDown} />
+              <span style={{ color: 'red' }}>
+                <FontAwesomeIcon icon={faLongArrowAltDown} /> 0.5%
+              </span>
             </>
           }
           key="3"
@@ -163,7 +169,9 @@ function LastWeek({
               <H1 className={key === 4 ? 'font-bold' : ''}>
                 {totalIncident.toFixed(2)}
               </H1>
-              <FontAwesomeIcon icon={faLongArrowAltUp} />
+              <span className="default">
+                <FontAwesomeIcon icon={faLongArrowAltUp} /> 0.05%
+              </span>
             </>
           }
           key="4"

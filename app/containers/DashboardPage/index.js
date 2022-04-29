@@ -2,13 +2,13 @@ import React, { useState, useEffect } from 'react';
 import { Helmet } from 'react-helmet';
 import axios from 'axios';
 import { Row, Col } from 'antd';
-
 import H2 from 'components/H2';
 import Content from 'components/Content';
 import LastMonth from './LastMonth';
 import TopRate from './TopRate';
 import TopConfirm from './TopConfirm';
 import LastWeek from './LastWeek';
+import WeeklyBar from './WeeklyBar';
 
 export default function DashboardPage() {
   const [monthly, setMonthly] = useState([]);
@@ -192,6 +192,10 @@ export default function DashboardPage() {
           <Col span={12} className="mt-10">
             <H2> What is your most active user?</H2>
             <TopConfirm data={topConfirm} />
+          </Col>
+          <Col span={24} className="mt-10">
+            <H2>Hows your social learning activity?</H2>
+            <WeeklyBar data={weeklySort} />
           </Col>
         </Row>
       </div>

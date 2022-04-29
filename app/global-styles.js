@@ -87,6 +87,7 @@ const GlobalStyle = createGlobalStyle`
 
 .float-right {
     float: right;
+    text-align: right;
 }
 .font-bold {
   font-weight: bolder;
@@ -110,8 +111,11 @@ const GlobalStyle = createGlobalStyle`
 .ant-tabs-top > div > .ant-tabs-nav .ant-tabs-ink-bar {
   top: 0;
 }
-.ant-tabs-tab.ant-tabs-tab-active .ant-tabs-tab-btn, .ant-tabs-tab:hover  {
+ .ant-tabs-tab:hover  {
   color: #3bb64a !important;
+}
+.ant-tabs-tab.ant-tabs-tab-active .ant-tabs-tab-btn {
+  color: black !important;
 }
 .ant-tabs-ink-bar {
   background: #3bb64a !important;
